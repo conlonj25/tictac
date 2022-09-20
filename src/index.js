@@ -47,13 +47,29 @@ import './index.css';
   class Game extends React.Component {
 
     constructor(props) {
+
       super(props);
+
+      this.coordsMaster = [
+        "(1,1)",
+        "(2,1)",
+        "(3,1)",
+        "(1,2)",
+        "(2,2)",
+        "(3,2)",
+        "(1,3)",
+        "(2,3)",
+        "(3,3)",
+      ];
+
       this.state = {
         history: [{
           squares: Array(9).fill(null),
+          coords: Array(9).fill(null),
         }],
         stepNumber: 0,
         xIsNext: true,
+        coords: Array(9).fill(null),
       };
     }
 
@@ -61,6 +77,8 @@ import './index.css';
       const history = this.state.history.slice(0, this.state.stepNumber + 1);
       const current = history[history.length - 1];
       const squares = current.squares.slice();
+      const coords = this.coordsMaster[i];
+      console.log(coords);
       if (calculateWinner(squares) || squares[i]) {
         return;
       }
@@ -71,6 +89,7 @@ import './index.css';
         }]),
         stepNumber: history.length,
         xIsNext: !this.state.xIsNext,
+        coords
       });
     }
 
